@@ -1,8 +1,14 @@
 # bitcoin in tiny pieces
 
-These are Python scripts made from scracth (only *bitcoin* dependency is *base58*) to play with Bitcoin addresses: public, private, WIF...
+These are Python scripts made from scracth to play with Bitcoin addresses: public, private, WIF...
 
 The scripts are compatible with Python 2 and Python 3.
+
+## before start
+
+Install base58 for Python (tested with base58-1.0.0):
+
+	$ pip install base58
 
 ## examples of use
 
@@ -24,7 +30,7 @@ The scripts are compatible with Python 2 and Python 3.
 		key_hash + checksum =   0091b24bf9f5288532960ac687abb035127b1d28a5 0074ffe0
 		bitcoin address =       1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm
 
-	$ echo 0x01 | ./bitcoin-wif-private-key.py
+	$ ./bitcoin-wif-private-key.py 0x01
 		privkey = 8001
 
 		For compressed public key:
@@ -37,29 +43,29 @@ The scripts are compatible with Python 2 and Python 3.
 		key + checksum =        8001 e27a1d3a
 		bitcoin address =       26k9aD1PF
 
-	$ ./bitcoin-public-from-private.py 0x01 | ./bitcoin-address-from-public-key.py | grep address | awk -F'= ' '{print $2;}' | xargs -I {} ./bitcoin-get-address-balance.py {}
+	$ echo 0x01 | ./bitcoin-public-from-private.py | ./bitcoin-address-from-public-key.py | grep address | awk -F'= ' '{print $2;}' | xargs -I {} ./bitcoin-get-address-balance.py {}
 
-	address         = 1BgGZ9tcN4rm9KBzDn7KprQz87SZ26SAMH
-	total_received  = 0.14609494 Bitcoin
-	final_balance   = 0 Bitcoin
+		address         = 1BgGZ9tcN4rm9KBzDn7KprQz87SZ26SAMH
+		total_received  = 0.14609494 Bitcoin
+		final_balance   = 0 Bitcoin
 
-	address         = 1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm
-	total_received  = 4.87126141 Bitcoin
-	final_balance   = 0 Bitcoin
+		address         = 1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm
+		total_received  = 4.87126141 Bitcoin
+		final_balance   = 0 Bitcoin
 
 	# changing *VERBOSE* to *False* on *bitcoin-address-from-public-key.py* the previous command is shorter:
 	# ./bitcoin-public-from-private.py 0x01 | ./bitcoin-address-from-public-key.py | xargs -I{} ./bitcoin-get-address-balance.py {}
 
 	# Use a SHA256 hashed string as private key, and check if it has been used:
 	$ ./bitcoin-test-address-balance.sh satoshi
-	satoshi
-	address         = 1ADJqstUMBB5zFquWg19UqZ7Zc6ePCpzLE
-	total_received  = 0.00375370 Bitcoin
-	final_balance   = 0 Bitcoin
+		satoshi
+		address         = 1ADJqstUMBB5zFquWg19UqZ7Zc6ePCpzLE
+		total_received  = 0.00375370 Bitcoin
+		final_balance   = 0 Bitcoin
 
-	address         = 1xm4vFerV3pSgvBFkyzLgT1Ew3HQYrS1V
-	total_received  = 0.00111100 Bitcoin
-	final_balance   = 0 Bitcoin
+		address         = 1xm4vFerV3pSgvBFkyzLgT1Ew3HQYrS1V
+		total_received  = 0.00111100 Bitcoin
+		final_balance   = 0 Bitcoin
 
 ## License
 
