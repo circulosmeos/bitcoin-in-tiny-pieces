@@ -15,8 +15,15 @@ Install base58 for Python (tested with base58-1.0.0):
 	$ ./bitcoin-public-from-private.py 0x01
 		79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798 483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8
 
+	# with VERBBOSE = True in bitcoin-address-from-public-key.py :
 	$ ./bitcoin-public-from-private.py 0x01 | ./bitcoin-address-from-public-key.py
 		pubkey = 0479be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8
+
+		Uncompressed public key:
+		key_hash =      91b24bf9f5288532960ac687abb035127b1d28a5
+		checksum =      0074ffe0526d823be09b39865422a1d6135afc85afb0a6863c58e9fe89989170
+		key_hash + checksum =   0091b24bf9f5288532960ac687abb035127b1d28a5 0074ffe0
+		bitcoin address =       1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm
 
 		Compressed public key:
 		key_hash =      751e76e8199196d454941c45d1b3a323f1433bd6
@@ -24,11 +31,11 @@ Install base58 for Python (tested with base58-1.0.0):
 		key_hash + checksum =   00751e76e8199196d454941c45d1b3a323f1433bd6 510d1634
 		bitcoin address =       1BgGZ9tcN4rm9KBzDn7KprQz87SZ26SAMH
 
-		Uncompressed public key:
-		key_hash =      91b24bf9f5288532960ac687abb035127b1d28a5
-		checksum =      0074ffe0526d823be09b39865422a1d6135afc85afb0a6863c58e9fe89989170
-		key_hash + checksum =   0091b24bf9f5288532960ac687abb035127b1d28a5 0074ffe0
-		bitcoin address =       1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm
+		Hybrid public key:
+		key_hash =      7083929bc41c16f2337fbcd10cd73df8a4e2a2bb
+		checksum =      74a0a7a97d3c7f60adceb3475880abac2231bc02b4f91753ae6dc20fcabe96ae
+		key_hash + checksum =   007083929bc41c16f2337fbcd10cd73df8a4e2a2bb 74a0a7a9
+		bitcoin address =       1BFvJKK757eGXdNHkXkgem4fWZU28d1cnk
 
 	$ ./bitcoin-wif-private-key.py 0x01
 		privkey = 8001
@@ -43,18 +50,21 @@ Install base58 for Python (tested with base58-1.0.0):
 		key + checksum =        8001 e27a1d3a
 		bitcoin address =       26k9aD1PF
 
-	$ echo 0x01 | ./bitcoin-public-from-private.py | ./bitcoin-address-from-public-key.py | grep address | awk -F'= ' '{print $2;}' | xargs -I {} ./bitcoin-get-address-balance.py {}
-
-		address         = 1BgGZ9tcN4rm9KBzDn7KprQz87SZ26SAMH
-		total_received  = 0.14609494 Bitcoin
-		final_balance   = 0 Bitcoin
+	$ echo 0x01 | ./bitcoin-public-from-private.py | ./bitcoin-address-from-public-key.py | xargs -I {} ./bitcoin-get-address-balance.py {}
 
 		address         = 1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm
 		total_received  = 4.87126141 Bitcoin
 		final_balance   = 0 Bitcoin
 
-	# changing *VERBOSE* to *False* on *bitcoin-address-from-public-key.py* the previous command is shorter:
-	# ./bitcoin-public-from-private.py 0x01 | ./bitcoin-address-from-public-key.py | xargs -I{} ./bitcoin-get-address-balance.py {}
+
+		address         = 1BgGZ9tcN4rm9KBzDn7KprQz87SZ26SAMH
+		total_received  = 0.14609494 Bitcoin
+		final_balance   = 0 Bitcoin
+
+
+		address         = 1BFvJKK757eGXdNHkXkgem4fWZU28d1cnk
+		total_received  = 0 Bitcoin
+		final_balance   = 0 Bitcoin
 
 	# Use a SHA256 hashed string as private key, and check if it has been used:
 	$ ./bitcoin-test-address-balance.sh satoshi
@@ -63,8 +73,14 @@ Install base58 for Python (tested with base58-1.0.0):
 		total_received  = 0.00375370 Bitcoin
 		final_balance   = 0 Bitcoin
 
+
 		address         = 1xm4vFerV3pSgvBFkyzLgT1Ew3HQYrS1V
 		total_received  = 0.00111100 Bitcoin
+		final_balance   = 0 Bitcoin
+
+
+		address         = 16uTbx4gagzvEzyeSh57SdxZNbZnTrRoks
+		total_received  = 0 Bitcoin
 		final_balance   = 0 Bitcoin
 
 ## License
