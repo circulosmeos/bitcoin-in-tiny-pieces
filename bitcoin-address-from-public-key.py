@@ -4,8 +4,10 @@
 # by circulosmeos //github.com/circulosmeos/bitcoin-in-tiny-pieces
 #
 # patched from //bitcoin.stackexchange.com/questions/56923/is-this-how-to-generate-a-bitcoin-address-with-python
+# See:
 # //en.bitcoin.it/wiki/Protocol_documentation#Addresses
-
+# ANSI X9.62-1998 Sections 4.3.6 and 4.3.7
+#
 import hashlib
 import base58
 import sys
@@ -15,7 +17,7 @@ from re import match
 # ECDSA bitcoin Public Key
 pubkey = ''
 # See 'compressed form' at https://en.bitcoin.it/wiki/Protocol_documentation#Signatures
-COMPRESS_PUBKEY = 2 # 0: uncompressed, 1: compressed, 2: print both!
+COMPRESS_PUBKEY = 3 # 0: uncompressed, 1: compressed, 2: hybrid, 3: print all!
 
 VERBOSE = False
 
@@ -61,8 +63,9 @@ if (len(pubkey)==0):
 if (VERBOSE): print ('pubkey = ' + pubkey)
 
 compress_pubkey = COMPRESS_PUBKEY
-if (COMPRESS_PUBKEY == 2):
-    compress_pubkey = 1
+if (COMPRESS_PUBKEY == 3):
+    COMPRESS_PUBKEY = 2
+    compress_pubkey = 0
 
 while (compress_pubkey <= COMPRESS_PUBKEY):
 
@@ -74,9 +77,17 @@ while (compress_pubkey <= COMPRESS_PUBKEY):
             pubkey_compressed = '03'
         pubkey_compressed += pubkey[2:66]
         hex_str = bytearray.fromhex(pubkey_compressed)
-    else:
+    elif (compress_pubkey==0):
         if (VERBOSE): print ("\nUncompressed public key:")
         hex_str = bytearray.fromhex(pubkey)
+    else:
+        if (VERBOSE): print ("\nHybrid public key:")
+        if (ord(bytearray.fromhex(pubkey[-2:])) % 2 == 0):
+            pubkey_compressed = '06'
+        else:
+            pubkey_compressed = '07'
+        pubkey_compressed += pubkey
+        hex_str = bytearray.fromhex(pubkey_compressed)
 
     # Obtain key:
 

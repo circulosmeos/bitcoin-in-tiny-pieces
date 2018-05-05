@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # (Python 2 & python 3 compatible)
-# Calculate public (x, y) bitcoin address from private bitcoin key (secret)
+# Calculate public (x, y) bitcoin key from private bitcoin key (secret)
 # by circulosmeos //github.com/circulosmeos/bitcoin-in-tiny-pieces
 #
 # modified from:

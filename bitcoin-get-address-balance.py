@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # (Python 2 & python 3 compatible)
 # Get final balance of a bitcoin address from blockchain.info json
-# by circulosmeos https://github.com/circulosmeos/bitcoin-in-tiny-pieces
-
+# by circulosmeos //github.com/circulosmeos/bitcoin-in-tiny-pieces
+#
 import sys
 import fileinput
 import re
@@ -12,6 +12,8 @@ try:    # python3
     from urllib.request import urlopen
 except: # python2
     from urllib2 import urlopen
+
+VERBOSE = False # if True, all json is printed, and blockchain_tags are not filtered.
 
 BELL = True
 WARNING_WAITING_TIME = 0
@@ -39,7 +41,7 @@ else:
         pass
 
 # check address (loose) correcteness
-m = re.match(r' *([a-zA-Z1-9]{1,34})$', address)
+m = re.match(r' *([a-zA-Z1-9]{1,34})', address)
 if ( m is not None ):
     address = m.group(1)
 else:
@@ -56,11 +58,17 @@ while (reading):
         htmlfile = urlopen("https://blockchain.info/address/%s?format=json" % address)
         reading  = 0
     except:
-        reading=1
+        reading+=1
         print( "..." )
-        sleep(60)
+        sleep(60*reading)
 
 htmltext = htmlfile.read().decode('utf-8')
+
+print( "\naddress \t= " + address )
+
+if (VERBOSE):
+    print (htmltext)
+    exit(0)
 
 blockchain_info = []
 tag = ''
@@ -71,8 +79,6 @@ try:
 except:
     print( "Error processing tag '%s'." % tag );
     exit(1)
-
-print( "\naddress \t= " + address )
 
 for i, coins in enumerate(blockchain_info):
 
