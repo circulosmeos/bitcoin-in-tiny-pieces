@@ -55,14 +55,13 @@ else:
 reading=1
 while (reading):
     try:
-        htmlfile = urlopen("https://blockchain.info/address/%s?format=json" % address)
+        htmlfile = urlopen("https://blockchain.info/address/%s?format=json" % address, timeout = 10)
+        htmltext = htmlfile.read().decode('utf-8')
         reading  = 0
     except:
         reading+=1
-        print( "..." )
+        print( "... " + str(reading) )
         sleep(60*reading)
-
-htmltext = htmlfile.read().decode('utf-8')
 
 print( "\naddress \t= " + address )
 
