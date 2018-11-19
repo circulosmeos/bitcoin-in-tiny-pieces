@@ -10,6 +10,13 @@ Install base58 for Python (tested with base58-1.0.0):
 
 	$ pip install base58
 
+Install pybitcointools from this repository (original one no longer maintained)
+Note: This has not been thoroughly tested for Python 3 compatibility yet.
+
+        $ git clone https://github.com/jamesyoungdigital/pybitcointools.git
+        $ cd pybitcointools
+        $ [sudo -H] python setup.py install
+
 ## examples of use
 
 	$ ./bitcoin-public-from-private.py 0x01
@@ -82,6 +89,28 @@ Install base58 for Python (tested with base58-1.0.0):
 		address         = 16uTbx4gagzvEzyeSh57SdxZNbZnTrRoks
 		total_received  = 0 Bitcoin
 		final_balance   = 0 Bitcoin
+
+	# Use a SHA256 heashed string as private key, and check if it has a balance.
+	$ ./bitcoin-get-brainwallet-balance.py 'the password is secret'
+		
+		brainwallet address 'the password is secret'
+        	address 1G9h3zyiYKMbMmps8D6UWHL958kbmb4V7z
+
+		No balance for brainwallet address 'the password is secret'
+
+	# Use a SHA256 heashed string as private key, and check if it has a balance.
+        $ ./bitcoin-get-brainwallet-balance.py <REDACTED A REAL BRAINWALLET PASSPHRASE>
+	
+		brainwallet address REDACTED
+        	address 1CiP4RHdkh3Q4AtLboxPueMQvVbyk4zLdr
+
+		Brainwallet addresss REDACTED
+		PrivKey: REDACTED
+		PubKey: 044a09ef02291c4f5e3551efc91a59de1ad58040b167619a<PARTIAL REDACTION>
+		Address: 1CiP4RHdkh3Q4AtLboxPueMQvVbyk4zLdr
+		Balance: 100000 Satoshis
+		Balance: 0.000010 BTC	
+
 
 ## License
 

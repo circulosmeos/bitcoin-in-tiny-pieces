@@ -55,7 +55,8 @@ else:
 reading=1
 while (reading):
     try:
-        htmlfile = urlopen("https://blockchain.info/address/%s?format=json" % address, timeout = 10)
+        # Use the new {} style of variable interpolation
+        htmlfile = urlopen("https://blockchain.info/address/{}?format=json".format(address), timeout = 10)
         htmltext = htmlfile.read().decode('utf-8')
         reading  = 0
     except:
