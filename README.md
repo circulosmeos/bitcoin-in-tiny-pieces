@@ -10,6 +10,13 @@ Install base58 for Python (tested with base58-1.0.0):
 
 	$ pip install base58
 
+Install pybitcointools from this repository (original one no longer maintained)
+Note: This has not been thoroughly tested for Python 3 compatibility yet.
+
+        $ git clone https://github.com/jamesyoungdigital/pybitcointools.git
+        $ cd pybitcointools
+        $ [sudo -H] python setup.py install
+
 ## examples of use
 
 	$ ./bitcoin-public-from-private.py 0x01
