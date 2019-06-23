@@ -83,6 +83,33 @@ Install base58 for Python (tested with base58-1.0.0):
 		total_received  = 0 Bitcoin
 		final_balance   = 0 Bitcoin
 
+## notes of usage
+
+The scripts contain useful comments and links to documentation. Also contain configuration variables that can be preset:
+
+Each script can be configured with at least the variable `VERBOSE` which can be `True` or `False`: if you want to concatenate scripts in command-line with `|`, you need to set `VERBOSE = False`.
+
+`bitcoin-address-from-public-key.py` contains the variable `COMPRESS_PUBKEY` that accepts the values 0 to 3 in order to print uncompressed, compressed, hybrid, or all of the valid formats of a public bitcoin address.
+
+`bitcoin-wif-from-private-key.py` contains the variable `COMPRESS_PUBKEY` that accepts the values 0 to 2 in order to print uncompressed, compressed, or both formats of WIF.
+
+## notes for Windows users
+
+The folder `batchs for Windows` contains `.bat` files for ease of usage with Windows:
+
+* be sure you have Python in your `%PATH%`, or prepend the Python path to `python` inside each `.bat`
+
+* modify inside each `.bat` the complete path to the folder where you've copied all these Python scripts
+
+* Now usage in Windows is as easy as with Linux:
+
+        C:\> echo 0x01 | bitcoin-public-from-private | bitcoin-address-from-public-key
+	        1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm
+	        1BgGZ9tcN4rm9KBzDn7KprQz87SZ26SAMH
+	        1BFvJKK757eGXdNHkXkgem4fWZU28d1cnk
+
+Please, see `notes of usage` above for configuring outputs and using with `|` concatenation.
+
 ## License
 
 Release under [GPL 3](https://www.gnu.org/licenses/gpl-3.0.en.html).
