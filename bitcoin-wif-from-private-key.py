@@ -38,7 +38,7 @@ if (len(privkey)==0):
     if ( m is not None ):
         privkey = '80' + m.group(1)
     else:
-        if (VERBOSE): print("\n./bitcoin-wif-private-key [80][64 hex]\n")
+        if (VERBOSE): print("\n./bitcoin-wif-from-private-key [80][64 hex]\n")
         exit(1)
 
 if (VERBOSE): print ('privkey = ' + privkey)

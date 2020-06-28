@@ -37,7 +37,7 @@ Install base58 for Python (tested with base58-1.0.0):
 		key_hash + checksum =   007083929bc41c16f2337fbcd10cd73df8a4e2a2bb 74a0a7a9
 		bitcoin address =       1BFvJKK757eGXdNHkXkgem4fWZU28d1cnk
 
-	$ ./bitcoin-wif-private-key.py 0x01
+	$ ./bitcoin-wif-from-private-key.py 0x01
 		privkey = 8001
 
 		For compressed public key:
